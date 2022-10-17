@@ -1,6 +1,7 @@
 //domain.com/:meetupId
 
 import { MongoClient, ObjectId } from "mongodb";
+import Head from "next/head";
 // ObjectId for converting string Id to ObjectId thing for mongoDB
 
 import { useRouter } from "next/router";
@@ -10,7 +11,15 @@ const MeetupDetails = (props) => {
   console.log(router.query, "HEY");
   const { meetupId } = router.query;
 
-  return <MeetupDetail meetupData={props.meetupData} />;
+  return (
+    <>
+      <Head>
+        <title>{props.meetupData.title}</title>
+        <meta name="description" content={props.meetupData.description} />
+      </Head>
+      <MeetupDetail meetupData={props.meetupData} />;
+    </>
+  );
 };
 
 // This tells NextJS for which dynamic parameter values this page should be pre rendered

@@ -5,6 +5,8 @@ import { MongoClient } from "mongodb";
 
 import { useEffect, useState } from "react";
 import MeetupList from "../components/meetups/MeetupList";
+import { Fragment } from "react";
+import Head from "next/head";
 
 const DUMMY_MEETUPS = [
   {
@@ -48,7 +50,21 @@ const Homepage = (props) => {
   //   Also this way NextJS doesnot pre render with the meetupItems in the list , it returns the first render version as the prerendered HTML code
   //   So we need to tell next js to prerender when some data arrives for which we have to wait */
 
-  return <MeetupList meetups={props.meetups} />;
+  return (
+    <Fragment>
+      <Head>
+        {/* A special component by Next ,where you can add all the elements of Head ,these will go to Head 🤩 */}
+        <title>Next Meetups</title>
+
+        {/* this description tag is used on search engines */}
+        <meta
+          name="description"
+          content="Browse a huge list of highly active react meetups"
+        />
+      </Head>
+      <MeetupList meetups={props.meetups} />
+    </Fragment>
+  );
 };
 
 // Static Site Generation

@@ -1,6 +1,7 @@
 // domain.com/new-meetup
 import NewMeetupForm from "../../components/meetups/NewMeetupForm";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const NewMeetupPage = () => {
   const router = useRouter();
@@ -24,6 +25,18 @@ const NewMeetupPage = () => {
     // Navigating away programmatically
     router.replace("/");
   };
-  return <NewMeetupForm onAddMeetup={addMeetupHandler} />;
+  return (
+    <>
+      <Head>
+        {/* A special component by Next ,where you can add all the elements of Head ,these will go to Head 🤩 */}
+        <title>Add a New Meetup</title>
+        <meta
+          name="description"
+          content="Add your own meetups and create amazing networking opportunities"
+        />
+      </Head>
+      <NewMeetupForm onAddMeetup={addMeetupHandler} />;
+    </>
+  );
 };
 export default NewMeetupPage;
